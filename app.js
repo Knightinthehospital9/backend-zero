@@ -1,14 +1,24 @@
-const http = require('node:http');// thư viện  có sẵn trong nodejs
+const express = require('express')
+const app = express()
+const port = 8888
+app.set('views', './src/views/');
+app.set('views engine', 'ejs')
+require('dotenv').config();
 
-const hostname = 'localhost';//local host
-const port = 3000; // 16bit chạy từ 0 * ->65355 trừ những cái port đã được quy định sẵn
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+    res.send('hello world')
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello, World!\n Nguyễn Khánh Nam');
-});
+})
+app.get('/abc', (req, res) => {
+    res.send('hello world Vu ngu')
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
+})
+app.get('/ngungu', (req, res) => {
+    res.render('sample.ejs')
+
+})
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
